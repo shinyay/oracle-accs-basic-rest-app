@@ -140,3 +140,159 @@ mvn コマンドにより作成されるディレクトリ構造は次のよう�
 **dependencyManagement** で Jersesy の使用が管理されているので、**dependency** 要素で定義を行っている ***jersey-container-grizzly2-http*** では、使用バージョンに関する定義は行っていません。
 
 また、ビルド・プラグインとして定義されている **maven-compiler-plugin** では、使用する Java のバージョンが ***1.7*** になっています。これを、***1.8*** に変更します。
+
+#### Maven で作成した Java ソースファイル
+
+**jersey-quickstart-grizzly2** によって Java ソースファイルが2つ作成されています。
+
+- Main.java
+- MyResource.java
+
+##### Main.java
+
+ここでは、Grizzly による HttpServer の起動を行っています。
+
+```java
+package com.sample.shinyay.rest;
+
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
+
+import java.io.IOException;
+import java.net.URI;
+
+/**
+ * Main class.
+ *
+ */
+public class Main {
+    // Base URI the Grizzly HTTP server will listen on
+    public static final String BASE_URI = "http://localhost:8080/myapp/";
+
+    /**
+     * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
+     * @return Grizzly HTTP server.
+     */
+    public static HttpServer startServer() {
+        // create a resource config that scans for JAX-RS resources and providers
+        // in com.sample.shinyay.rest package
+        final ResourceConfig rc = new ResourceConfig().packages("com.sample.shinyay.rest");
+
+        // create and start a new instance of grizzly http server
+        // exposing the Jersey application at BASE_URI
+        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
+    }
+
+    /**
+     * Main method.
+     * @param args
+     * @throws IOException
+     */
+    public static void main(String[] args) throws IOException {
+        final HttpServer server = startServer();
+        System.out.println(String.format("Jersey app started with WADL available at "
+                + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
+        System.in.read();
+        server.stop();
+    }
+}
+
+```
+
+**BASE_URI** は、REST メソッドを追加する URI を指定しています。
+**ResourceConfig** クラスは、アノテーションされる Jersey のクラスが配置されるパッケージを指定します。
+
+##### MyResource.java
+
+**MyResource** クラスは、REST メソッドによる操作を定義しています。このデフォルトの状態では、`http://localhost:8080/myapp/myresource` に対して `GET` でアクセスすると動作します。
+
+```java
+package com.sample.shinyay.rest;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+/**
+ * Root resource (exposed at "myresource" path)
+ */
+@Path("myresource")
+public class MyResource {
+
+    /**
+     * Method handling HTTP GET requests. The returned object will be sent
+     * to the client as "text/plain" media type.
+     *
+     * @return String that will be returned as a text/plain response.
+     */
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getIt() {
+        return "Got it!";
+    }
+}
+
+```
+
+#### 動作確認
+
+動作確認をしてみます。まず、コンパイルを行います。
+
+```bash
+$ mvn clean compile
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building jersey_service 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ jersey_service ---
+[INFO] Deleting D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey_service\target
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ jersey_service ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey_service\src\main\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ jersey_service ---
+[INFO] Compiling 2 source files to D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey_service\target\classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.897 s
+[INFO] Finished at: 2016-12-24T07:39:37+09:00
+[INFO] Final Memory: 15M/212M
+[INFO] ------------------------------------------------------------------------
+```
+
+次に、Main メソッドを実行して Grizzly を起動します。
+
+```bash
+$ mvn exec:java
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building jersey_service 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] >>> exec-maven-plugin:1.2.1:java (default-cli) > validate @ jersey_service >>>
+[INFO]
+[INFO] <<< exec-maven-plugin:1.2.1:java (default-cli) < validate @ jersey_service <<<
+[INFO]
+[INFO] --- exec-maven-plugin:1.2.1:java (default-cli) @ jersey_service ---
+12 24, 2016 7:41:32 午前 org.glassfish.grizzly.http.server.NetworkListener start
+情報: Started listener bound to [localhost:8080]
+12 24, 2016 7:41:32 午前 org.glassfish.grizzly.http.server.HttpServer start
+情報: [HttpServer] Started.
+Jersey app started with WADL available at http://localhost:8080/myapp/application.wadl
+Hit enter to stop it...
+```
+
+起動したら、REST API のエンドポイントにブラウザからアクセスしてみます。
+
+- http://localhost:8080/myapp/myresource
+
+![](images/accs-rest02.jpg)
+
+正常に動作した事が確認できます。
