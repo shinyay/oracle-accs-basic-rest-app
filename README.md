@@ -46,7 +46,7 @@ mvn archetype:generate -DarchetypeGroupId=org.glassfish.jersey.archetypes -Darch
 
 mvn コマンドにより作成されるディレクトリ構造は次のようになります:
 
-![](./images/accs-rest01.jpg)
+![](images/accs-rest01.jpg)
 
 
 #### Maven で作成した pom.xml
