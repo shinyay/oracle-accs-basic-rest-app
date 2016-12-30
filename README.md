@@ -40,7 +40,7 @@ LIST に格納さえれているデータに対して、2種類のメソッド�
 次のコマンド・オプションを用いて Maven を実行します:
 
 ```bash
-mvn archetype:generate -DarchetypeGroupId=org.glassfish.jersey.archetypes -DarchetypeArtifactId=jersey-quickstart-grizzly2 -DarchetypeVersion=2.25 -DinteractiveMode=false -DgroupId=com.sample.shinyay.rest -DartifactId=jersey_service -Dpackage=com.sample.shinyay.rest -DarchetypeVersion=2.25
+mvn archetype:generate -DarchetypeGroupId=org.glassfish.jersey.archetypes -DarchetypeArtifactId=jersey-quickstart-grizzly2 -DarchetypeVersion=2.25 -DinteractiveMode=false -DgroupId=com.sample.shinyay.rest -DartifactId=jersey-service -Dpackage=com.sample.shinyay.rest
 ```
 #### Maven で作成したプロジェクトのディレクトリ構造
 
@@ -60,10 +60,10 @@ mvn コマンドにより作成されるディレクトリ構造は次のよう�
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sample.shinyay.rest</groupId>
-    <artifactId>jersey_service</artifactId>
+    <artifactId>jersey-service</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>jersey_service</name>
+    <name>jersey-service</name>
 
     <dependencyManagement>
         <dependencies>
@@ -245,18 +245,18 @@ $ mvn clean compile
 [INFO] Scanning for projects...
 [INFO]
 [INFO] ------------------------------------------------------------------------
-[INFO] Building jersey_service 1.0-SNAPSHOT
+[INFO] Building jersey-service 1.0-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
 [INFO]
-[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ jersey_service ---
-[INFO] Deleting D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey_service\target
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ jersey-service ---
+[INFO] Deleting D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey-service\target
 [INFO]
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ jersey_service ---
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ jersey-service ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey_service\src\main\resources
+[INFO] skip non existing resourceDirectory D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey-service\src\main\resources
 [INFO]
-[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ jersey_service ---
-[INFO] Compiling 2 source files to D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey_service\target\classes
+[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ jersey-service ---
+[INFO] Compiling 2 source files to D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey-service\target\classes
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
@@ -273,14 +273,14 @@ $ mvn exec:java
 [INFO] Scanning for projects...
 [INFO]
 [INFO] ------------------------------------------------------------------------
-[INFO] Building jersey_service 1.0-SNAPSHOT
+[INFO] Building jersey-service 1.0-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
 [INFO]
-[INFO] >>> exec-maven-plugin:1.2.1:java (default-cli) > validate @ jersey_service >>>
+[INFO] >>> exec-maven-plugin:1.2.1:java (default-cli) > validate @ jersey-service >>>
 [INFO]
-[INFO] <<< exec-maven-plugin:1.2.1:java (default-cli) < validate @ jersey_service <<<
+[INFO] <<< exec-maven-plugin:1.2.1:java (default-cli) < validate @ jersey-service <<<
 [INFO]
-[INFO] --- exec-maven-plugin:1.2.1:java (default-cli) @ jersey_service ---
+[INFO] --- exec-maven-plugin:1.2.1:java (default-cli) @ jersey-service ---
 12 24, 2016 7:41:32 午前 org.glassfish.grizzly.http.server.NetworkListener start
 情報: Started listener bound to [localhost:8080]
 12 24, 2016 7:41:32 午前 org.glassfish.grizzly.http.server.HttpServer start
@@ -358,17 +358,17 @@ $ mvn clean compile
 [INFO] Scanning for projects...
 [INFO]
 [INFO] ------------------------------------------------------------------------
-[INFO] Building jersey_service 1.0-SNAPSHOT
+[INFO] Building jersey-service 1.0-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
 [INFO]
-[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ jersey_service ---
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ jersey-service ---
 [INFO]
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ jersey_service ---
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ jersey-service ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey_service\src\main\resources
+[INFO] skip non existing resourceDirectory D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey-service\src\main\resources
 [INFO]
-[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ jersey_service ---
-[INFO] Compiling 2 source files to D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey_service\target\classes
+[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ jersey-service ---
+[INFO] Compiling 2 source files to D:\msys64\home\syanagih\work\git-repo\oracle-accs-basic-rest-app\maven\jersey-service\target\classes
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
@@ -385,10 +385,10 @@ $ mvn package
 [INFO] Scanning for projects...
 [INFO]
 [INFO] ------------------------------------------------------------------------
-[INFO] Building jersey_service 1.0-SNAPSHOT
+[INFO] Building jersey-service 1.0-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
 [INFO]
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ jersey_service ---
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ jersey-service ---
 [INFO] Using 'UTF-8' encoding to copy filtered resources.
 ...
 ...
